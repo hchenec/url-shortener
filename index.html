@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirigiendo...</title>
+  <script>
+    async function redirect() {
+      const path = window.location.pathname.replace("/", "");
+      if (!path) return;
+
+      const res = await fetch("redirects.json");
+      const redirects = await res.json();
+
+      if (redirects[path]) {
+        window.location.href = redirects[path];
+      } else {
+        document.body.innerHTML = "<h1>URL no encontrada</h1>";
+      }
+    }
+    redirect();
+  </script>
+</head>
+<body>
+  Redirigiendo...
+</body>
+</html>
